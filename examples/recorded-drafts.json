@@ -1,0 +1,42 @@
+{
+  "REQ-QTY": {
+    "statement": "A checkout accepts whole item quantities from 1 to 5 inclusive. It rejects all other quantities without updating the cart.",
+    "draft": {
+      "positive": {
+        "title": "Save a typical quantity",
+        "action": "Set item quantity to 3",
+        "expected": "The cart quantity becomes 3"
+      },
+      "negative": {
+        "title": "Reject a fractional quantity",
+        "action": "Set item quantity to 2.5 with a current quantity of 3",
+        "expected": "A validation error is shown and quantity remains 3"
+      },
+      "boundary": {
+        "title": "Save the maximum quantity",
+        "action": "Set item quantity to 5",
+        "expected": "The cart quantity becomes 5"
+      }
+    }
+  },
+  "REQ-DISCOUNT": {
+    "statement": "A discount from 0 to 20 percent inclusive is saved. A larger or negative discount is rejected without changing the saved discount.",
+    "draft": {
+      "positive": {
+        "title": "Save a typical discount",
+        "action": "Save a 10 percent discount",
+        "expected": "A 10 percent discount is displayed after reload"
+      },
+      "negative": {
+        "title": "Reject a negative discount",
+        "action": "With 10 percent saved, attempt to save a -1 percent discount",
+        "expected": "The change is rejected and 10 percent remains saved"
+      },
+      "boundary": {
+        "title": "Save the highest discount",
+        "action": "Save a 20 percent discount",
+        "expected": "The saved discount equals 20 percent"
+      }
+    }
+  }
+}

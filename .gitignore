@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+.ruff_cache/
+reports/*.json
+!reports/llama-smollm2-sample.json
+!reports/llama-qwen-sample.json
+*.gguf

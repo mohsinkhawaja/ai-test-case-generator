@@ -1,0 +1,88 @@
+{
+  "provider": "llama.cpp:qwen-qa",
+  "requirements": [
+    {
+      "id": "REQ-QTY",
+      "statement": "A checkout accepts whole item quantities from 1 to 5 inclusive. It rejects all other quantities without updating the cart.",
+      "integer_constraint": {
+        "field": "quantity",
+        "minimum": 1,
+        "maximum": 5,
+        "accepted_result": "The cart displays the submitted quantity.",
+        "rejected_result": "A validation error appears and the existing cart quantity is unchanged."
+      }
+    },
+    {
+      "id": "REQ-DISCOUNT",
+      "statement": "A discount from 0 to 20 percent inclusive is saved. A larger or negative discount is rejected without changing the saved discount.",
+      "integer_constraint": {
+        "field": "discount_percent",
+        "minimum": 0,
+        "maximum": 20,
+        "accepted_result": "The saved discount equals the submitted percent.",
+        "rejected_result": "A validation error appears and the saved discount is unchanged."
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "REQ-QTY-POSITIVE",
+      "requirement_id": "REQ-QTY",
+      "category": "positive",
+      "status": "draft",
+      "title": "Accept a quantity from 1 to 5 inclusive",
+      "action": "Submit quantity = 3",
+      "expected": "The cart displays the submitted quantity."
+    },
+    {
+      "id": "REQ-QTY-NEGATIVE",
+      "requirement_id": "REQ-QTY",
+      "category": "negative",
+      "status": "draft",
+      "title": "Reject quantity above 5",
+      "action": "Submit quantity = 6",
+      "expected": "A validation error appears and the existing cart quantity is unchanged."
+    },
+    {
+      "id": "REQ-QTY-BOUNDARY",
+      "requirement_id": "REQ-QTY",
+      "category": "boundary",
+      "status": "draft",
+      "title": "Accept the maximum quantity",
+      "action": "Submit quantity = 5",
+      "expected": "The cart displays the submitted quantity."
+    },
+    {
+      "id": "REQ-DISCOUNT-POSITIVE",
+      "requirement_id": "REQ-DISCOUNT",
+      "category": "positive",
+      "status": "draft",
+      "title": "Accept a typical discount percent",
+      "action": "Submit discount_percent = 10",
+      "expected": "The saved discount equals the submitted percent."
+    },
+    {
+      "id": "REQ-DISCOUNT-NEGATIVE",
+      "requirement_id": "REQ-DISCOUNT",
+      "category": "negative",
+      "status": "draft",
+      "title": "Reject discount percent above the allowed limit",
+      "action": "Submit discount_percent = 21",
+      "expected": "A validation error appears and the saved discount is unchanged."
+    },
+    {
+      "id": "REQ-DISCOUNT-BOUNDARY",
+      "requirement_id": "REQ-DISCOUNT",
+      "category": "boundary",
+      "status": "draft",
+      "title": "Accept the maximum discount percent",
+      "action": "Submit discount_percent = 20",
+      "expected": "The saved discount equals the submitted percent."
+    }
+  ],
+  "counts": {
+    "positive": 2,
+    "negative": 2,
+    "boundary": 2
+  }
+}
